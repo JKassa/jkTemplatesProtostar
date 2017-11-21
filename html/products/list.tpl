@@ -236,7 +236,7 @@
           {% if product.cart_disabled %}
           <span class="btn btn-small btn-primary disabled" title="{{ product.cart_title }}">
             <span class="icon-shopping-cart icon-cart icon-white"></span>
-            {{ cart_btn_text }}
+            {{ product.cart_text }}
           </span>
           {% else %}
           <a href="#" data-click="to-cart" data-id="{{ product.id }}" class="btn btn-small btn-primary" title="{{ product.cart_title }}">
