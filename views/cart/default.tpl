@@ -228,21 +228,40 @@
         <div class="span7 m-l-0"><strong>{{ '_' | jtext: 'COM_JKASSA_SUM' }}:</strong></div>
         <div class="span5 m-l-0 cost"><span>{{ total | costDisplay }}</span>{{ currency.symbol }}</div>
         {% endif %}
+		{% if discounts.sav %}
+        <!--Discount sav-->
+        <div class="span7 m-l-0"><strong>{{ discounts.sav.name }}:</strong></div>
+        <div class="span5 m-l-0">
+          -{{ discounts.sav.difference | costDisplay }}{{ currency.symbol }}
+		  {% if discounts.sav.percent %}
+		  <em>({{ discounts.sav.discount }}%)</em>
+		  {% endif %}
+          {% if discounts.sav.desc %}
+          <span class="icon-help icon-info-sign hasTooltip" title="{{ discounts.sav.desc }}"></span>
+          {% endif %}
+        </div>
+        {% endif %}
         {% if discounts.sum %}
-        <!--Discounts sum-->
+        <!--Discount sum-->
         <div class="span7 m-l-0"><strong>{{ discounts.sum.name }}:</strong></div>
         <div class="span5 m-l-0">
           -{{ discounts.sum.difference | costDisplay }}{{ currency.symbol }}
+		  {% if discounts.sum.percent %}
+		  <em>({{ discounts.sum.discount }}%)</em>
+		  {% endif %}
           {% if discounts.sum.desc %}
           <span class="icon-help icon-info-sign hasTooltip" title="{{ discounts.sum.desc }}"></span>
           {% endif %}
         </div>
         {% endif %}
 		{% if discounts.code %}
-		<!--Discounts code-->
+		<!--Discount code-->
 		<div class="span7 m-l-0"><strong>{{ discounts.code.name }}:</strong></div>
         <div class="span5 m-l-0">
           -{{ discounts.code.difference | costDisplay }}{{ currency.symbol }}
+		  {% if discounts.code.percent %}
+		  <em>({{ discounts.code.discount }}%)</em>
+		  {% endif %}
           {% if discounts.code.desc %}
           <span class="icon-help icon-info-sign hasTooltip" title="{{ discounts.code.desc }}"></span>
           {% endif %}
