@@ -82,9 +82,9 @@
 <div class="row-fluid" itemscope itemtype="http://schema.org/Product">
   <!--Images-->
   <div class="span7 product-image">
-	{% assign jkimages = images | jkimages: 64, 380 %}
-    {% if jkimages %}
-      {{ jkimages }}
+	{% assign jkmedia = images | jkmedia: 64, 380 %}
+    {% if jkmedia %}
+      {{ jkmedia }}
     {% else %}
     <img {{ image | img_exists: '260x380' }} alt="{{ alias }}">
     {% endif %}
