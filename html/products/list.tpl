@@ -287,7 +287,7 @@
 			  $('body').addClass('modal-open');
 			  var modalBody = $(this).find('.modal-body');
 			  modalBody.find('iframe').remove();
-			  modalBody.prepend('<iframe class="iframe" src="{{ product.quick_url }}" name="{{ product.name }}" height="400px"></iframe>');
+			  modalBody.prepend('<iframe class="iframe" src="{{ product.quick_url }}" name="{{ product.alias }}" height="400px"></iframe>');
 		  }).on('shown.bs.modal', function() {
 			  var modalHeight = $('div.modal:visible').outerHeight(true),
 			  modalHeaderHeight = $('div.modal-header:visible').outerHeight(true),
