@@ -206,7 +206,14 @@
         </a>
         <div id="code-toggle" style="display: none">
           <input type="text" id="coupons_code" placeholder="{{ '_' | jtext: 'COM_JKASSA_ORDER_CODE_ENTER' }}" class="input-small" value="{{ coupon.value }}">
-          <button data-click="code-apply" class="btn" type="button">{{ '_' | jtext: 'COM_JKASSA_APPLY' }}</button>
+		  <div class="btn-group">
+			<a href="#" data-click="code-apply" class="btn">
+			  {{ '_' | jtext: 'COM_JKASSA_APPLY' }}
+			</a>
+			<a href="#" data-click="code-clear" class="btn" title="{{ '_' | jtext: 'JCLEAR' }}">
+			  <span class="icon-cancel icon-remove-sign"></span>
+			</a>
+		  </div>
         </div>
         {% if coupon.note %}
         <div class="alert alert-danger" id="coupons_note">

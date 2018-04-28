@@ -204,7 +204,14 @@
     <div class="span12 m-l-0 form-inline">
 	  <p class="muted">{{ '_' | jtext: 'COM_JKASSA_ORDER_CODE_TITLE' }}</p>
 	  <input type="text" id="coupons_code" placeholder="{{ '_' | jtext: 'COM_JKASSA_ORDER_CODE_ENTER' }}" value="{{ coupon.value }}">
-      <a href="#" data-click="code-apply" class="btn">{{ '_' | jtext: 'COM_JKASSA_APPLY' }}</a>
+	  <div class="btn-group">
+        <a href="#" data-click="code-apply" class="btn">
+		  {{ '_' | jtext: 'COM_JKASSA_APPLY' }}
+		</a>
+		<a href="#" data-click="code-clear" class="btn" title="{{ '_' | jtext: 'JCLEAR' }}">
+		  <span class="icon-cancel icon-remove-sign"></span>
+		</a>
+	  </div>
       {% if coupon.note %}
       <div class="alert alert-danger m-t-5">
         {{ coupon.note }}
