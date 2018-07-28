@@ -131,7 +131,6 @@
   
   <!--Cost block-->
   <div class="span5">
-    
     {% if manufacturer %}
     <!--Manufacturer-->
     <div itemtype="http://schema.org/Brand" itemscope itemprop="brand">
@@ -345,6 +344,17 @@
     {% if social %}
     <div class="m-t-10">
       {{ social }}
+    </div>
+    {% endif %}
+	
+	{% if aff_income %}
+    <!--Affiliate Links-->
+    <div class="m-t-10">
+      {{ 'bootstrap.modal' | jhtml: 'jk-modal_affiliate' }}
+      <a href="#jk-modal_affiliate" data-toggle="modal" class="muted">
+        <span class="icon-flag"></span>
+		  <em>{{ '_' | jtext: 'COM_JKASSA_AFFILIATE_AFFILIATE_REWARD' }}: <strong>{{ aff_income | costDisplay }}{{ currency.symbol }}</strong></em>
+      </a>
     </div>
     {% endif %}
   </div>
@@ -648,3 +658,45 @@
   </div>
   <div class="modal-body"></div>
 </div>
+
+{% comment %}
+  Madal body for Affiliate Links.
+{% endcomment %}
+{% if aff_income %}
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+      $('#jk-modal_affiliate').on('show.bs.modal', function() {
+          $('body').addClass('modal-open');
+          var modalBody = $(this).find('.modal-body');
+          modalBody.find('iframe').remove();
+          modalBody.prepend('<iframe class="iframe" src="{{ aff_url }}" name="affiliate" height="200px"></iframe>');
+      }).on('shown.bs.modal', function() {
+          var modalHeight = $('div.modal:visible').outerHeight(true),
+          modalHeaderHeight = $('div.modal-header:visible').outerHeight(true),
+          modalBodyHeightOuter = $('div.modal-body:visible').outerHeight(true),
+          modalBodyHeight = $('div.modal-body:visible').height(),
+          modalFooterHeight = $('div.modal-footer:visible').outerHeight(true),
+          padding = document.getElementById('jk-modal_affiliate').offsetTop,
+          maxModalHeight = ($(window).height()-(padding*2)),
+          modalBodyPadding = (modalBodyHeightOuter-modalBodyHeight),
+          maxModalBodyHeight = maxModalHeight-(modalHeaderHeight+modalFooterHeight+modalBodyPadding);
+          var iframeHeight = $('.iframe').height();
+          if (iframeHeight > maxModalBodyHeight){;
+              $('.modal-body').css({'max-height': maxModalBodyHeight, 'overflow-y': 'auto'});
+              $('.iframe').css('max-height', maxModalBodyHeight-modalBodyPadding);
+          }
+      }).on('hide.bs.modal', function () {
+          $('body').removeClass('modal-open');
+          $('.modal-body').css({'max-height': 'initial', 'overflow-y': 'initial'});
+          $('.modalTooltip').tooltip('destroy');
+      });
+  });
+</script>
+<div id="jk-modal_affiliate" tabindex="-1" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close novalidate" data-dismiss="modal">×</button>
+    <h3>{{ '_' | jtext: 'COM_JKASSA_AFFILIATE_PROGRAM' }}</h3>
+  </div>
+  <div class="modal-body"></div>
+</div>
+{% endif %}
