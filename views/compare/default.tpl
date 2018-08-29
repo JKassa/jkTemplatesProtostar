@@ -53,6 +53,10 @@
                     <span class="minicolors-swatch">
                       <span style="background-color: {{ variant.value }};" title="{{ variant.title }}"></span>
                     </span>
+				  {% when 'texture' %}
+              		<span class="minicolors-swatch">
+					  <img src="{{ variant.img }}" alt="{{ variant.alt }}" title="{{ variant.title }}">
+              		</span>
                   {% when 'select' %}
                     <span>
                       {{ variant.value }}
@@ -186,6 +190,10 @@
                     <span class="minicolors-swatch">
                       <span style="background-color: {{ variant.value }}" title="{{ variant.title }}"></span>
                     </span>
+				  {% when 'texture' %}
+              		<span class="minicolors-swatch">
+					  <img src="{{ variant.img }}" alt="{{ variant.alt }}" title="{{ variant.title }}">
+              		</span>
                   {% when 'select' %}
                     <span>
                       {{ variant.value }}

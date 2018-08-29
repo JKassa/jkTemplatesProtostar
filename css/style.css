@@ -178,6 +178,10 @@ del { font-size: 12px; }
 	width: 20px;
     position: relative;
     vertical-align: middle;
+	overflow: hidden;
+}
+.minicolors-swatch img {
+    max-width: none;
 }
 .small > .minicolors-swatch, small > .minicolors-swatch {
 	height: 10px;
