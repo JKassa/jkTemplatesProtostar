@@ -582,6 +582,7 @@
 {% comment %}
   Madal body for Waiting List.
 {% endcomment %}
+{% if waitinglist %}
 <script type="text/javascript">
   jQuery(document).ready(function($) {
 	  $('#jk-modal_waitinglist').on('show.bs.modal', function() {
@@ -618,10 +619,12 @@
   </div>
   <div class="modal-body"></div>
 </div>
+{% endif %}
 
 {% comment %}
   Madal body for Quick order.
 {% endcomment %}
+{% if quickorder %}
 <script type="text/javascript">
   jQuery(document).ready(function($) {
       $('#jk-modal_quickorder').on('show.bs.modal', function() {
@@ -658,6 +661,7 @@
   </div>
   <div class="modal-body"></div>
 </div>
+{% endif %}
 
 {% comment %}
   Madal body for Affiliate Links.

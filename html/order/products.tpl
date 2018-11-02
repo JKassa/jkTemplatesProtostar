@@ -129,10 +129,15 @@
     {% for discount in discounts %}
     <tr>
       <td colspan="3" class="text-right" style="text-align: right">
-      {{ discount.name }}{% if discount.percent %}({{ discount.discount }}){% endif %}:
+        {{ discount.name }}:
       </td>
       <td colspan="2">
         {{ discount.difference | costDisplay }}{{ currency.symbol }}
+		{% if discount.percent %}
+		<small>
+		  ({{ discount.discount }}{{ discount.d_symbol }})
+		</small>
+		{% endif %}
       </td>
     </tr>
     {% endfor %}
