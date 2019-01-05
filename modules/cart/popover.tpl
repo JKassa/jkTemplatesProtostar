@@ -9,7 +9,7 @@
   {% assign span = 'span12' %}
 {% endif %}
 
-<div id="jk-cart-module">
+<div id="jk-cart-module" class="{{ class_sfx }}">
 	{% capture popover_html %}
 	<div class="row-fluid">
 	  {% if image %}

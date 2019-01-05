@@ -66,7 +66,7 @@
   
   {% if delivery_fields %}
   <!--Delivery fields-->
-  <fieldset>
+  <fieldset id="jk-order-delivery">
     <legend>{{ delivery_title }}</legend>
     {% for delivery in delivery_fields %}
     <div{% if delivery.showon %} data-showon='{{ delivery.showon }}'{% endif %}>
@@ -79,6 +79,10 @@
           {% if delivery.default %} checked{% endif %}
          >
         <strong>{{ delivery.label }}</strong>
+		{% if delivery.logo %}
+        <br>
+        <img src="{{ delivery.logo }}" alt="{{ delivery.name }}" class="img-polaroid" />
+        {% endif %}
         {% if delivery.cost != 0.00 %}
         <!--Cost of delivery-->
         <span class="help-block">
@@ -118,6 +122,8 @@
                 {% include 'html/forms/field_checkbox' %}
               {% when 'calendar' %}
                 {% include 'html/forms/field_calendar' %}
+			  {% when 'note' %}
+                {% include 'html/forms/field_note' %}
             {% endcase %}
 		  {% endif %}
         {% endfor %}

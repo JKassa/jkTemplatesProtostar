@@ -4,7 +4,7 @@
 {{ 'stylesheet' | jhtml: 'css/style.css' }}
 {{ 'script' | jhtml: 'js/template.js' }}
 
-<form action="{{ form_action }}" name="modSearchForm{{ autocomplete_id }}" id="modSearchForm{{ autocomplete_id }}" method="get" class="form-search" style="width: {{ width_form }}px; margin: 10px auto">
+<form action="{{ form_action }}" name="modSearchForm{{ autocomplete_id }}" id="modSearchForm{{ autocomplete_id }}" method="get" class="form-search {{ class_sfx }}" style="width: {{ width_form }}px; margin: 10px auto">
   <div class="input-append">
     <input type="text" name="searchword" maxlength="{{ maxlength }}" class="search-query" placeholder="{{ '_' | jtext: 'MOD_JKASSA_SEARCH_PLACEHOLDER' }}" style="width: {{ width_form | minus: 96 }}px">
     <button type="submit" class="btn">
