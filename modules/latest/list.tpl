@@ -2,7 +2,7 @@
   {% for product in products %}
   <li itemscope itemtype="http://schema.org/Product">
     {% if product.image %}
-    <div class="m-b-5">
+    <div class="m-b-5 m-t-5">
       <a itemprop="url" href="{{ product.url }}">
         <img itemprop="image" src="{{ product.image }}" alt="{{ product.alias }}" style="max-height: 50px; max-width: 50px" />
       </a>
@@ -12,7 +12,7 @@
       <span itemprop="name">{{ product.name }}</span>
     </a>
     {% if product.introtext %}
-    <div class="m-t-5" style="font-size: 11px; line-height: 14px">
+    <div class="m-b-5 m-t-5" style="font-size: 11px; line-height: 14px">
       <span itemprop="description">
         {{ product.introtext | truncateDesc: 100 }}
       </span>
@@ -20,7 +20,7 @@
     {% endif %}
 	{% if show_stock %}
 	<!--Stock-->
-	<div class="muted m-t-5 text-right small">
+	<div class="muted m-b-5 m-t-5 text-right small">
 	  {% case product.stock %} 
 	  {% when 0 %}
 	  <!--Not available-->
@@ -43,7 +43,7 @@
 	{% endcomment %}
 	{% if reviews_included %}
 	  <!--Rating reviews-->
-	  <div class="text-right" title="{{ 'plural' | jtext: 'COM_JKASSA_REVIEWS_COUNT', product.rating_count }}">
+	  <div class="text-right m-b-5 m-t-5" title="{{ 'plural' | jtext: 'COM_JKASSA_REVIEWS_COUNT', product.rating_count }}">
 		{% for i in (1..5) %}
 		  {% if product.rating >= i %}
 		  <span class="icon-star" style="color: #F2CD00"></span>
@@ -56,14 +56,14 @@
 	  {% assign votes = product.id | jkcountervotes: product.rating, product.rating_count %}
 	  {% if votes %}
 	  <!--Voting-->
-	  <div class="text-right">
+	  <div class="text-right m-b-5 m-t-5">
 		{{ votes }}
 	  </div>
 	  {% endif %}
 	{% endif %}
 	{% endif %}
     {% if product.cost %}
-    <div class="m-t-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div class="m-b-5 m-t-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       {% if product.old_cost %}
       <del>{{ product.old_cost }}{{ currency.symbol }}</del>
       {% endif %}
@@ -75,7 +75,8 @@
     </div>
     {% endif %}
     {% if btns %}
-    <div class="btn-group m-t-5">
+    <div class="m-b-5 m-t-5">
+	  <div class="btn-group">
 	  {% if readmore %}
 	  <!--More-->
       <a itemprop="url" class="btn btn-mini" href="{{ product.url }}">
@@ -125,6 +126,7 @@
 	  </a>
 	  {% endif %}
 	  {% endif %}
+	  </div>
     </div>
     {% endif %}
   </li>
