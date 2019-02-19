@@ -10,9 +10,8 @@
 	{% else %}
 		{% assign class = '' %}
 {% endcase %}
-<div class="control-group"{% if field.showon %} data-showon='{{ field.showon }}'{% endif %}>
+<div class="control-group m-b-0"{% if field.showon %} data-showon='{{ field.showon }}'{% endif %}>
   <div class="alert{{ class }}">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
     {% if field.label %}<h4>{{ field.label }}</h4>{% endif %}
     {{ field.tooltip }}
   </div>
