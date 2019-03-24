@@ -1,7 +1,9 @@
 {{ 'stylesheet' | jhtml: 'css/style.css' }}
-{% assign btns = 0 | plus: readmore, to_cart, to_wishlist, to_compare %}
 <div class="jkassa jk-latest-module {{ class_sfx }}">
 	{% if products %}
+	  {% capture block_height %}{% if block_height %}height: {{ block_height }}px;{% endif %}{% endcapture %}
+	  {% capture img_width_height %}{% if img_height %}max-width: 100%; max-height: {{ img_height }}px;{% endif %}{% endcapture %}
+	  {% assign btns = 0 | plus: readmore, to_cart, to_wishlist, to_compare %}
 	  {% case layout %}
 		{% when 'blocks' %}
 		  {% include 'modules/latest/blocks' %}
@@ -11,6 +13,10 @@
 				margin-left: 35px;
 				margin-right: 35px;
 				width: auto;
+			}
+			.jk-latest-module .product-image {
+				height: {{ img_height }}px;
+				text-align: center;
 			}
 			.jk-latest-module .carousel-control {
 				background: #ccc;

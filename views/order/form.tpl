@@ -139,7 +139,7 @@
   
   {% if payment_fields %}
   <!--Payment fields-->
-  <fieldset>
+  <fieldset id="jk-order-payment">
     <legend>{{ payment_title }}</legend>
     {% for payment in payment_fields %}
     <div{% if payment.showon %} data-showon='{{ payment.showon }}'{% endif %}>
