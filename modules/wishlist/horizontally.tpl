@@ -5,26 +5,24 @@
 	<div class="row-fluid mjkblock">
 	  <ul class="thumbnails">
 		{% for product in products %}
-		<li itemscope itemtype="http://schema.org/Product" class="span3 thumbnail {% if product.active %}active{% endif %}">
+		<li class="span3 thumbnail {% if product.active %}active{% endif %}">
 		  <div style="height: 145px">
 			{% if product.image %}
 			<div class="product-image" style="text-align: center">
-			  <a itemprop="url" href="{{ product.url }}" title="{{ product.name }}">
-				<img itemprop="image" src="{{ product.image }}" alt="{{ product.alias }}" style="max-height: 75px; max-width: 75px" />
+			  <a href="{{ product.url }}" title="{{ product.name }}">
+				<img src="{{ product.image }}" alt="{{ product.alias }}" style="max-height: 75px; max-width: 75px" />
 			  </a>
 			</div>
 			{% endif %}
 			<div class="caption">
 			  <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
-				<a itemprop="url" href="{{ product.url }}" title="{{ product.name }}">
+				<a href="{{ product.url }}" title="{{ product.name }}">
 				  {{ product.name }}
 				</a>
 			  </div>
 			  {% if product.introtext %}
 			  <div class="m-t-5" style="font-size: 11px; line-height: 14px">
-				<span itemprop="description">
 				  {{ product.introtext | truncateDesc: 35 }}
-				</span>
 			  </div>
 			  {% endif %}
 			  {% if product.old_cost %}
@@ -34,11 +32,9 @@
 		  </div>
 		  <div class="caption">
 			{% if product.cost %}
-			<div class="m-t-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<div class="m-t-5">
 			  <span class="cost">
-				<meta itemprop="priceCurrency" content="{{ currency.code }}">
-				{% assign options = 'dec_point,thousands_sep' | arrayCombine: '.', '*' %}
-				<span itemprop="price" content="{{ product.cost | costDisplay: options }}">{{ product.cost | costDisplay }}</span>{{ currency.symbol }}
+				<span>{{ product.cost | costDisplay }}</span>{{ currency.symbol }}
 			  </span>
 			</div>
 			{% endif %}

@@ -134,19 +134,19 @@
 
 <!--Details-->
 <ul class="breadcrumb">
-  <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+  <li>
     <span class="icon-user"></span>
     {{ 'sprintf' | jtext: 'COM_JKASSA_WRITTEN_BY', '' }}
     {% if contact_link %}
-    <a href="{{ contact_link }}"><span itemprop="name">{{ author }}</span></a>
+    <a href="{{ contact_link }}">{{ author }}</a>
     {% else %}
-    <span itemprop="name">{{ author }}</span>
+    {{ author }}
     {% endif %}
     <span class="divider">|</span>
   </li>
   <li>
     <span class="icon-calendar"></span>
-    <time datetime="{{ 'date' | jhtml: publish, 'c' }}" itemprop="datePublished">
+    <time>
       {% assign date_publish = 'date' | jhtml: publish, 'DATE_FORMAT_LC2' %}
       {{ 'sprintf' | jtext: 'COM_JKASSA_PUBLISHED_DATE_ON', date_publish }}
     </time>
@@ -154,7 +154,7 @@
   </li>
   <li>
     <span class="icon-calendar"></span>
-    <time datetime="{{ 'date' | jhtml: created, 'c' }}" itemprop="dateCreated">
+    <time>
       {% assign date_created = 'date' | jhtml: created, 'DATE_FORMAT_LC2' %}
       {{ 'sprintf' | jtext: 'COM_JKASSA_CREATED_DATE_ON', date_created }}
     </time>
@@ -162,7 +162,7 @@
   </li>
   <li>
     <span class="icon-calendar"></span>
-    <time datetime="{{ 'date' | jhtml: modified, 'c' }}" itemprop="dateModified">
+    <time>
       {% assign date_modified = 'date' | jhtml: modified, 'DATE_FORMAT_LC2' %}
       {{ 'sprintf' | jtext: 'COM_JKASSA_LAST_UPDATED', date_modified }}
     </time>

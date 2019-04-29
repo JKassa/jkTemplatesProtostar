@@ -24,7 +24,8 @@
       </button>
     </fieldset>
   
-    <!--Filter search-->
+    {% if search_phrases %}
+	<!--Filter search-->
     <fieldset class="help-block">
       <div class="controls">
         <label class="radio inline" id="searchphraseall-lbl" for="searchphraseall">
@@ -41,6 +42,7 @@
         </label>
       </div>
     </fieldset>
+	{% endif %}
     
     {% if searchareas %}
     <fieldset>

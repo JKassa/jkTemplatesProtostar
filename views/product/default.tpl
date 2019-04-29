@@ -79,7 +79,7 @@
 {% endif %}
 
 <!--Product-->
-<div class="row-fluid" itemscope itemtype="http://schema.org/Product">
+<div class="row-fluid">
   <!--Images-->
   <div class="span7 product-image">
 	{% assign jkmedia = images | jkmedia: 64, 380 %}
@@ -133,10 +133,9 @@
   <div class="span5">
     {% if manufacturer %}
     <!--Manufacturer-->
-    <div itemtype="http://schema.org/Brand" itemscope itemprop="brand">
+    <div>
       <a title="{{ manufacturer.name }}" href="{{ manufacturer.url }}" target="_top">
-		<span style="display: none;" itemprop="name">{{ manufacturer.name }}</span>
-        <img src="{{ manufacturer.logo }}" alt="{{ manufacturer.alias }}" class="img-polaroid" style="max-height: 60px; max-width: 200px" itemprop="logo">
+        <img src="{{ manufacturer.logo }}" alt="{{ manufacturer.alias }}" class="img-polaroid" style="max-height: 60px; max-width: 200px">
       </a>
     </div>
     {% endif %}
@@ -161,10 +160,8 @@
     
     <!--Name-->
     <h2>
-      <a itemprop="url" href="{{ url }}" target="_top">
-        <span itemprop="name">
+      <a href="{{ url }}" target="_top">
           {{ name }}
-        </span>
       </a>
       
       {% if files %}
@@ -191,14 +188,11 @@
     {% endif %}
     
     <!--Cost-->
-    <div itemscope itemprop="offers" itemtype="http://schema.org/Offer">
-      <meta content="{{ currency.code }}" itemprop="priceCurrency">
-      <link href="http://schema.org/InStock" itemprop="availability">
+    <div>
       {% if old_cost %}
       <del>{{ old_cost | costDisplay }}{{ currency.symbol }}</del>
       {% endif %}
-	  {% assign options = 'dec_point,thousands_sep' | arrayCombine: '.', '*' %}
-      <span class="lead" itemprop="price" content="{{ cost | costDisplay: options }}">{{ cost | costDisplay }}</span><strong>{{ currency.symbol }}</strong>
+      <span class="lead">{{ cost | costDisplay }}</span><strong>{{ currency.symbol }}</strong>
 	  {% if vat %}
 	  <span class="muted small">
 		({{ 'sprintf' | jtext: 'COM_JKASSA_VAT_INCL', vat }})
@@ -206,13 +200,10 @@
       {% endif %}
     </div>
     
-	{% if show_sku %}
+	{% if show_sku and sku %}
     <!--SKU (code)-->
     <div class="muted small text-right">
-      {{ '_' | jtext: 'COM_JKASSA_SKU' }}:
-      <span itemprop="mpn">
-        {{ sku }}
-      </span>
+      {{ '_' | jtext: 'COM_JKASSA_SKU' }}: {{ sku }}
     </div>
 	{% endif %}
     
@@ -358,11 +349,6 @@
     </div>
     {% endif %}
   </div>
-  
-  <!--Product Description (introtext)-->
-  <span itemprop="description" style="display: none">
-    {{ introtext | truncateDesc: 140 }}
-  </span>
 </div>
 
 {% comment %}
@@ -528,7 +514,7 @@
 		</li>
 		<li>
 			<span class="icon-calendar"></span>
-			<time datetime="{{ 'date' | jhtml: publish, 'c' }}">
+			<time>
 				{% assign date_publish = 'date' | jhtml: publish, 'DATE_FORMAT_LC2' %}
 				{{ 'sprintf' | jtext: 'COM_JKASSA_PUBLISHED_DATE_ON', date_publish }}
 			</time>
@@ -536,7 +522,7 @@
 		</li>
 		<li>
 			<span class="icon-calendar"></span>
-			<time datetime="{{ 'date' | jhtml: created, 'c' }}">
+			<time>
 				{% assign date_created = 'date' | jhtml: created, 'DATE_FORMAT_LC2' %}
 				{{ 'sprintf' | jtext: 'COM_JKASSA_CREATED_DATE_ON', date_created }}
 			</time>
@@ -544,7 +530,7 @@
 		</li>
 		<li>
 			<span class="icon-calendar"></span>
-			<time datetime="{{ 'date' | jhtml: modified, 'c' }}">
+			<time>
 				{% assign date_modified = 'date' | jhtml: modified, 'DATE_FORMAT_LC2' %}
 				{{ 'sprintf' | jtext: 'COM_JKASSA_LAST_UPDATED', date_modified }}
 			</time>

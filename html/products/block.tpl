@@ -1,7 +1,7 @@
 <div class="row-fluid block-products">
   <ul class="thumbnails unstyled">
     {% for product in products %}
-    <li class="span{{ span }}" itemscope itemtype="http://schema.org/Product">
+    <li class="span{{ span }}">
       <div class="over-wraper">
         <div class="thumbnail over-wraper-long">
           
@@ -36,9 +36,8 @@
             
             {% if product.manufacturer %}
             <!--Manufacturer name and miniature-->
-            <div style="position: absolute; right: 0; top: 0" itemtype="http://schema.org/Brand" itemscope itemprop="brand">
-              <span style="display: none;" itemprop="name">{{ product.manufacturer.name }}</span>
-              <img {{ product.manufacturer.thumbnail | img_exists: '30x30' }} class="manufacturer hasTooltip" itemprop="logo" alt="{{ product.manufacturer.alias }}" title="{{ product.manufacturer.name }}">
+            <div style="position: absolute; right: 0; top: 0">
+              <img {{ product.manufacturer.thumbnail | img_exists: '30x30' }} class="manufacturer hasTooltip" alt="{{ product.manufacturer.alias }}" title="{{ product.manufacturer.name }}">
             </div>
             {% endif %}
             
@@ -94,7 +93,7 @@
             <!--Name and URL of the product-->
             <h4>
               <a href="{{ product.url }}" target="_top">
-                <span itemprop="name">{{ product.name }}</span>
+                {{ product.name }}
               </a>
               {% if product.files %}
               <!--Files-->
@@ -105,16 +104,14 @@
             </h4>
             
             <!--Price product-->
-            <div class="m-t-10" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <div class="m-t-10">
               {% if product.old_cost %}
               <!--old cost-->
               <del>{{ product.old_cost | costDisplay }}{{ currency.symbol }}</del>
               {% endif %}
               <!--cost-->
               <span class="cost">
-                <meta itemprop="priceCurrency" content="{{ currency.code }}" />
-                {% assign options = 'dec_point,thousands_sep' | arrayCombine: '.', '*' %}
-                <span itemprop="price" content="{{ product.cost | costDisplay: options }}">{{ product.cost | costDisplay }}</span>{{ currency.symbol }}
+                <span>{{ product.cost | costDisplay }}</span>{{ currency.symbol }}
               </span>
 			  {% if product.vat %}
 	  		  <span class="muted small">
@@ -189,7 +186,7 @@
             <!--Buttons-->
             <div class="btn-group m-t-10" style="width: 100%;">
               <!--More-->
-              <a href="{{ product.url }}" class="btn btn-small" title="{{ 'sprintf' | jtext: 'COM_JKASSA_READ_MORE', product.name }}" itemprop="url" target="_top">
+              <a href="{{ product.url }}" class="btn btn-small" title="{{ 'sprintf' | jtext: 'COM_JKASSA_READ_MORE', product.name }}" target="_top">
                 <span class="icon-circle-arrow-right icon-arrow-right-2"></span>
               </a>
               <!--Add to cart-->
@@ -234,11 +231,6 @@
               {{ count_comments }}
               {% endif %}
             </div>
-			
-			<!--Product Description (introtext)-->
-			<span itemprop="description" style="display: none">
-			  {{ product.introtext | truncateDesc: 140 }}
-			</span>
           </div>
         </div>
       </div>

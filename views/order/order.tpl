@@ -19,10 +19,13 @@
       <!--Product Image-->
       <div class="span4">
         <div class="product-image">
-          {% if product.discount %}
+          {% if product.d_simple %}
           <ul class="stickers">
             <li>
-              <span class="product-label">-{{ product.discount | costDisplay }}{{ product.d_symbol }}</span>
+              <span class="product-label">
+				{% assign options = 'decimals' | arrayCombine: 0 %}
+			    -{{ product.d_simple.value | costDisplay: options }}{% if product.d_simple.symbol == '%' %}{{ product.d_simple.symbol }}{% endif %}
+			  </span>
             </li>
           </ul>
           {% endif %}
@@ -93,6 +96,19 @@
           <del>{{ product.old_cost | costDisplay }}{{ currency.symbol }}</del>
         </div>
         {% endif %}
+		{% if product.d_coupon %}
+		<!--Promotional code-->
+		<span class="text-error small">
+		  <strong>{{ product.d_coupon.name }}</strong>:
+		  -{{ product.d_coupon.difference | costDisplay }}{{ currency.symbol }}
+		  {% if product.d_coupon.symbol == '%' %}
+		  <em>({{ product.d_coupon.value }}%)</em>
+		  {% endif %}
+          {% if product.d_coupon.desc %}
+          <span class="icon-help icon-info-sign hasTooltip" title="{{ product.d_coupon.desc }}"></span>
+          {% endif %}
+		</span>
+		{% endif %}
       </div>
       <!--Product price-->
       <div class="span12 m-l-0 p-b-0">
@@ -152,19 +168,6 @@
         {% endif %}
       </div>
       {% endif %}
-      {% if discounts.code %}
-      <!--Discount code-->
-      <div class="span7 m-l-0"><strong>{{ discounts.code.name }}:</strong></div>
-      <div class="span5 m-l-0">
-        -{{ discounts.code.difference }}{{ currency.symbol }}
-		{% if discounts.code.percent %}
-		<em>({{ discounts.code.discount }}%)</em>
-		{% endif %}
-        {% if discounts.code.desc %}
-        <span class="icon-help icon-info-sign hasTooltip" title="{{ discounts.code.desc }}"></span>
-        {% endif %}
-      </div>
-      {% endif %}
       {% if delivery_cost %}
       <!--Delivery cost-->
       <div class="span7 m-l-0"><strong>{{ '_' | jtext: 'COM_JKASSA_ORDER_DELIVERY' }}:</strong></div>
@@ -208,7 +211,7 @@
           <span class="icon-key icon-gift"></span>
           {{ '_' | jtext: 'COM_JKASSA_ORDER_CODE_USE' }}
         </a>
-        <div id="code-toggle" style="display: none">
+        <div id="code-toggle" class="m-t-5" style="display: none">
           <input type="text" id="coupons_code" placeholder="{{ '_' | jtext: 'COM_JKASSA_ORDER_CODE_ENTER' }}" class="input-small" value="{{ coupon.value }}">
 		  <div class="btn-group">
 			<a href="#" data-click="code-apply" class="btn">
@@ -220,7 +223,7 @@
 		  </div>
         </div>
         {% if coupon.note %}
-        <div class="alert alert-danger" id="coupons_note">
+        <div id="coupons_note" class="alert alert-danger m-t-5 p-8">
           {{ coupon.note }}
         </div>
         {% endif %}
