@@ -74,7 +74,10 @@
           <br>
           <!--discount-->
           <div class="discount">
-            {{ '_' | jtext: 'COM_JKASSA_DISCOUNT' }} {{ cheap.discount | costDisplay }}{{ cheap.symbol }}
+			{{ '_' | jtext: 'COM_JKASSA_DISCOUNT' }} {{ cheap.difference | costDisplay }}{{ currency.symbol }}
+			{% if cheap.percent %}
+		    <small>({{ cheap.discount }}%)</small>
+		    {% endif %}
           </div>
           <!--Add to cart-->
           <div class="m-t-10">
@@ -93,14 +96,18 @@
   <a class="carousel-control left" href="#cheaperCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#cheaperCarousel" data-slide="next">&rsaquo;</a>
 </div>
-<script type="text/jscript">
-  jQuery('.cheaperCarousel').carousel({"interval": 5000, "pause": "hover"});
-  // carousel fix conflict with mootools
-  if (typeof jQuery != 'undefined' && typeof MooTools != 'undefined' ) {
-	  Element.implement({
-		  slide: function(how, mode){
-			  return this;
-		  }
-	  });
-  }
+<script>
+jQuery(document).ready(function ()
+{
+	jQuery('#cheaperCarousel').carousel({interval: false});
+	
+	// carousel fix conflict with mootools
+	if (typeof jQuery != 'undefined' && typeof MooTools != 'undefined' ) {
+		Element.implement({
+			slide: function(how, mode){
+				return this;
+			}
+		});
+	};
+});
 </script>

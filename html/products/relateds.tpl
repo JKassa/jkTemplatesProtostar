@@ -2,7 +2,7 @@
   <ul class="thumbnails center">
     {% for related in relateds %}
     <li class="span3">
-      <div class="over-wraper">
+      <div class="over-wraper" style="border-bottom:none">
         <div class="thumbnail over-wraper-long">
           <!--Product Image-->
           <div class="product-image">
