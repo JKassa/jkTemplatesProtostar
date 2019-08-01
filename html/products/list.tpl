@@ -278,6 +278,7 @@
       Madal body for Quick view.
     {% endcomment %}
 	{% if show_view %}
+	{% capture selector_quick_view %}jk-quick_view-{{ product.id }}{% endcapture %}
     <script type="text/javascript">
 	  jQuery(document).ready(function($) {
 		  $('#{{ selector_quick_view }}').on('show.bs.modal', function() {
