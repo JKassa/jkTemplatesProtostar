@@ -80,6 +80,15 @@
     </a>
   </li>
   {% endif %}
+  {% if guest != 1 %}
+  <li>
+    {{ 'bootstrap.modal' | jhtml: 'jk-modal_reviews' }}
+    <a href="#jk-modal_reviews" data-toggle="modal">
+      {{ '_' | jtext: 'COM_JKASSA_YOUR_REVIEWS' }}
+      <span class="badge pull-right">{{ reviews_quantity }}</span>
+    </a>
+  </li>
+  {% endif %}
   {% if affiliate %}
   <li>
     <a href="{{ affiliate_route }}">
@@ -345,6 +354,48 @@
   <div class="modal-header">
 	<button type="button" class="close novalidate" data-dismiss="modal">×</button>
 	<h3>{{ title_orders }}</h3>
+  </div>
+  <div class="modal-body"></div>
+</div>
+
+{% comment %}
+  Madal body for reviews.
+{% endcomment %}
+<script type="text/javascript">
+  jQuery(function($){ $("#jk-modal_reviews").modal({"backdrop": true,"keyboard": true,"show": false,"remote": ""}); });
+  jQuery(document).ready(function($) {
+	  $('#jk-modal_reviews').on('show.bs.modal', function() {
+		  $('body').addClass('modal-open');
+		  var modalBody = $(this).find('.modal-body');
+		  modalBody.find('iframe').remove();
+		  modalBody.prepend('<iframe class="iframe" src="{{ reviews_url }}" name="reviews_url" height="400px"></iframe>');
+	  }).on('shown.bs.modal', function() {
+		  var modalHeight = $('div.modal:visible').outerHeight(true),
+		  modalHeaderHeight = $('div.modal-header:visible').outerHeight(true),
+		  modalBodyHeightOuter = $('div.modal-body:visible').outerHeight(true),
+		  modalBodyHeight = $('div.modal-body:visible').height(),
+		  modalFooterHeight = $('div.modal-footer:visible').outerHeight(true),
+		  padding = document.getElementById('jk-modal_reviews').offsetTop,
+		  maxModalHeight = ($(window).height()-(padding*2)),
+		  modalBodyPadding = (modalBodyHeightOuter-modalBodyHeight),
+		  maxModalBodyHeight = maxModalHeight-(modalHeaderHeight+modalFooterHeight+modalBodyPadding);
+		  var iframeHeight = $('.iframe').height();
+		  if (iframeHeight > maxModalBodyHeight){;
+			  $('.modal-body').css({'max-height': maxModalBodyHeight, 'overflow-y': 'auto'});
+			  $('.iframe').css('max-height', maxModalBodyHeight-modalBodyPadding);
+		  }
+	  }).on('hide.bs.modal', function () {
+		  $('body').removeClass('modal-open');
+		  $('.modal-body').css({'max-height': 'initial', 'overflow-y': 'initial'});
+		  $('.modalTooltip').tooltip('destroy');
+	  });
+  });
+</script>
+{% capture title_reviews %}{{ '_' | jtext: 'COM_JKASSA_YOUR_REVIEWS' }} <span class="badge">{{ reviews_quantity }}</span>{% endcapture %}
+<div id="jk-modal_reviews" tabindex="-1" class="modal hide fade">
+  <div class="modal-header">
+	<button type="button" class="close novalidate" data-dismiss="modal">×</button>
+	<h3>{{ title_reviews }}</h3>
   </div>
   <div class="modal-body"></div>
 </div>
